@@ -4,6 +4,7 @@ export default {
   theme: {
     fontFamily: {
       DMSans: ["DM Sans", "sans-serif"],
+      Nunito: ["Nunito", "sans-serif"],
     },
     extend: {
       backgroundImage: {
