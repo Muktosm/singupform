@@ -2,13 +2,23 @@ import { Result } from "postcss";
 import React, { useState } from "react";
 
 const From2 = () => {
-  const [email, setEmail] = useState("");
-  //   cosnt[(emailError, setEmailError)] = useState(false);
-  const handelEmailError = (e) => {
-      setEmail(e.target.value);
-  };
+   const [email, setEmail] = useState("");
+   const [error, setError] = useState("");
 
+   const handleChange = (e) => {
+     const emailValue =e.target.value;
+     setEmail(emailValue);
 
+     // Check if "@" is not present in the email
+     if (!emailValue.includes("@")) {
+       setError('Email must contain "@" symbol.');
+     } else if (emailValue.includes(" ")) {
+       setError("Email can't have a space")
+     }
+     else {
+       setError(""); // Clear the error if "@" is present
+     }
+   };
   return (
     <>
       <div className="flex items-center justify-center w-full min-h-screen ">
@@ -19,15 +29,19 @@ const From2 = () => {
           <p className="font-Nunito font-light text-[28p] text-[#141414] leading-[38px] text-center  ">
             Lookback is free to try for 14 days
           </p>
-          <div className="flex justify-center pt-[47.6px] pb-[20px]  ">
-            <input
-              onChange={handelEmailError}
-              type="email"
-              name=""
-              id=""
-              placeholder="Your email"
-              className=" w-[420px] h-[60px] rounded-[100px] outline-none border-[2px] border-[#EBEAED] pl-[24px]   "
-            />
+          <div className="flex justify-center pt-[47.6px] pb-[20px] min-h-[151.59px]  ">
+            <div>
+              <input
+                onChange={handleChange}
+                value={email}
+                type="email"
+                name=""
+                id=""
+                placeholder="Your email"
+                className=" w-[420px] h-[60px] rounded-[100px] outline-none border-[2px] border-[#EBEAED] pl-[24px]   "
+              />
+              {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
             <button
               type="submit"
               className="w-[120px] h-[60px] rounded-[100px] text-white font-medium font-DMSans text-[20px] leading-[26px] bg-[#25DAC5] ml-[30px] "
